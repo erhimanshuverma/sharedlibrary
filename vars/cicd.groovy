@@ -1,19 +1,19 @@
-gitDownload(repo)
+def gitDownload(repo)
 {
 git "https://github.com/erhimanshuverma/${repo}.git"
 }
 
-buildArtifact()
+def buildArtifact()
 {
 	 sh "mvn package"
 }
 
-Deploy(pipe, ip, context)
+def Deploy(pipe, ip, context)
 {
  sh "scp /var/lib/jenkins/workspace/${pipe}/webapp/target/webapp.war ubuntu@${ip}:/var/lib/tomcat10/webapps/${context}.war"
 }
 
-runSelenium(pipeline)
+def runSelenium(pipeline)
 {
     sh "java -jar /var/lib/jenkins/workspace/${pipeline}/testing.jar"
 }
